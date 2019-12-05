@@ -49,24 +49,28 @@ cv2.imwrite('edges.jpg',edge_img)
 
 lines = []
 raw_lines = cv2.HoughLines(edge_img,1,np.pi/180, 200)
-#raw_lines = merge_lines(raw_lines, NUM_LINES)
 for i in range(NUM_LINES):
     for rho,theta in raw_lines[i]:
-        print(f'HDI: {i}')
         if rho < 0:
             raw_lines[i,0,0] = -rho
             raw_lines[i,0,1] = theta - np.pi
-        a = np.cos(theta)
-        b = np.sin(theta)
-        x0 = a*rho
-        y0 = b*rho
-        x1 = int(x0 + 5000*(-b))
-        y1 = int(y0 + 5000*(a))
-        x2 = int(x0 - 5000*(-b))
-        y2 = int(y0 - 5000*(a))
-        lines.append(Line((x1,y1),(x2, y2)))
-        cv2.line(img,(x1,y1),(x2,y2),(0,0,255),2)
 raw_lines = merge_lines(raw_lines, NUM_LINES)
+print(raw_lines)
+for rho,theta in raw_lines:
+    if rho < 0:
+        raw_lines[i,0,0] = -rho
+        raw_lines[i,0,1] = theta - np.pi
+    a = np.cos(theta)
+    b = np.sin(theta)
+    x0 = a*rho
+    y0 = b*rho
+    x1 = int(x0 + 5000*(-b))
+    y1 = int(y0 + 5000*(a))
+    x2 = int(x0 - 5000*(-b))
+    y2 = int(y0 - 5000*(a))
+    lines.append(Line((x1,y1),(x2, y2)))
+    cv2.line(img,(x1,y1),(x2,y2),(0,0,255),2)
+
 
 
 intersections = []
