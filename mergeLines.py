@@ -27,15 +27,15 @@ def merge_lines(rholines, num):
 
     hor = np.sort(hor, order=['rho'])
     virt = np.sort(virt, order=['rho'])
-    print("Horizontal Lines", hor)
-    print("Virtical Lines", virt)
+    #print("Horizontal Lines", hor)
+    #print("Virtical Lines", virt)
     
     #seperate on rho
     prev = hor[0][0]
     prevgrp = 0
     for i in range(1, len(hor)):
         #print(f"iteration={i} prev={prev} current={hor[i][0]} diff={abs(hor[i][0] - prev)}")
-        if abs(hor[i][0] - prev) > 100: # Create a new group
+        if abs(hor[i][0] - prev) > 50: # Create a new group
             print(hor[prevgrp:i])
             linegrps.append(hor[prevgrp:i])
             prevgrp = i
@@ -46,7 +46,7 @@ def merge_lines(rholines, num):
     prev = virt[0][0]
     prevgrp = 0
     for i in range(1, len(virt)):
-        if abs(virt[i][0] - prev) > 100: # Create a new group
+        if abs(virt[i][0] - prev) > 50: # Create a new group
             linegrps.append(virt[prevgrp:i])
             prevgrp = i
         prev = virt[i][0]

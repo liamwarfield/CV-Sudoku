@@ -3,6 +3,7 @@ import numpy as np
 import itertools
 import math
 from mergeLines import merge_lines
+import sudoku
 
 NUM_LINES = 70
 class Intersection:
